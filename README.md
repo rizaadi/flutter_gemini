@@ -1,16 +1,27 @@
-# flutter_gemini
+# Flutter Gemini
 
-A new Flutter project.
+Demonstrates Gemini AI using flutter
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Text Only Input
+- Text and Image Input
+- Multi-turn conversations (chat)
 
-A few resources to get you started if this is your first Flutter project:
+## Requirements
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter: required version
+- Dart: required version
+- Others: any other requirements
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Setup and Installation
+
+1. To use the Gemini API, you'll need an API key. If you don't already have one, create a key in Google AI Studio.
+
+## Code Structure
+
+- `lib/`: This is where the Dart code lives. It includes the following subdirectories:
+  - `core/`: This directory typically contains code that's shared across the app, like utilities and constants.
+  - `data/`: This directory typically contains code related to data, like models and data providers.
+  - `presentation/`: This directory typically contains code related to the user interface, like widgets and screens.
+  - `main.dart`: This is the entry point of the Flutter application.
