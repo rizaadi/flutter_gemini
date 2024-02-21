@@ -1,4 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gemini/presentation/text_and_image/bloc/text_and_image_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class TextFieldBottomWidget extends StatefulWidget {
   const TextFieldBottomWidget({
@@ -15,6 +20,7 @@ class TextFieldBottomWidget extends StatefulWidget {
 }
 
 class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
+  final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +33,22 @@ class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
       ),
       child: Row(
         children: [
+          GestureDetector(
+            onTap: () async {
+              final image = await _picker.pickMultiImage();
+              if (image.isEmpty) return;
+              
+              // ignore: use_build_context_synchronously
+              context.read<TextAndImageBloc>().add(AddImage(image.map((e) => File(e.path)).toList()));
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Icon(
+                Icons.image_rounded,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          ),
           Expanded(
             child: SizedBox(
               height: 45,

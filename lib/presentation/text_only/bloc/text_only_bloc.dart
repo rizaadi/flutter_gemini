@@ -12,13 +12,12 @@ part 'text_only_state.dart';
 class TextOnlyBloc extends Bloc<TextOnlyEvent, TextOnlyState> {
   final GeminiRepository geminiRepository;
 
-  TextOnlyBloc({required this.geminiRepository}) : super(TextOnlyState.initial()) {
+  TextOnlyBloc({required this.geminiRepository})
+      : super(TextOnlyState.initial()) {
     on<TextOnlyGenerate>((event, emit) async {
       try {
-        emit(state.copyWith(
-          status: TextOnlyStatus.loading,
-          prompt: event.text,
-        ));
+        emit(state.copyWith(status: TextOnlyStatus.loading));
+
         final response = await geminiRepository.textOnly(
           event.text,
           safetySettings: [

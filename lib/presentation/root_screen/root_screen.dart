@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/presentation/text_and_image/pages/text_and_image_page.dart';
 import 'package:flutter_gemini/presentation/text_only/pages/text_only_pages.dart';
 
 class RootScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _RootScreenState extends State<RootScreen> with TickerProviderStateMixin {
         controller: _tabController,
         children: const [
           PageOnlyPage(),
-          Center(child: Text('Text and Image')),
+          TextAndImagePage(),
           Center(child: Text('Chat')),
         ],
       ),
