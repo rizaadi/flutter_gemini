@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_gemini/core/services/api_service.dart';
-import 'package:flutter_gemini/data/repository/gemini_repository.dart';
+import 'package:flutter_gemini/data/repository/gemini_repository_impl.dart';
 import 'package:flutter_gemini/presentation/root_screen/root_screen.dart';
 import 'package:flutter_gemini/presentation/text_and_image/bloc/text_and_image_bloc.dart';
 import 'package:flutter_gemini/presentation/text_only/bloc/text_only_bloc.dart';
@@ -28,12 +27,12 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider<TextOnlyBloc>(
-            create: (context) => TextOnlyBloc(
-                geminiRepository: GeminiRepositoryImpl(api: ApiService())),
+            create: (context) =>
+                TextOnlyBloc(geminiRepository: GeminiRepositoryImpl()),
           ),
           BlocProvider(
-            create: (context) => TextAndImageBloc(
-                geminiRepository: GeminiRepositoryImpl(api: ApiService())),
+            create: (context) =>
+                TextAndImageBloc(geminiRepository: GeminiRepositoryImpl()),
           )
         ],
         child: const RootScreen(),

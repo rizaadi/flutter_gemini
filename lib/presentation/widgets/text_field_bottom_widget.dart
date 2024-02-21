@@ -10,10 +10,12 @@ class TextFieldBottomWidget extends StatefulWidget {
     super.key,
     required this.textController,
     required this.onFieldSubmitted,
+    this.showImagePicker = false,
   });
 
   final TextEditingController textController;
   final VoidCallback onFieldSubmitted;
+  final bool showImagePicker;
 
   @override
   State<TextFieldBottomWidget> createState() => _TextFieldBottomWidgetState();
@@ -33,22 +35,25 @@ class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
       ),
       child: Row(
         children: [
-          GestureDetector(
-            onTap: () async {
-              final image = await _picker.pickMultiImage();
-              if (image.isEmpty) return;
-              
-              // ignore: use_build_context_synchronously
-              context.read<TextAndImageBloc>().add(AddImage(image.map((e) => File(e.path)).toList()));
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: Icon(
-                Icons.image_rounded,
-                color: Theme.of(context).colorScheme.primary,
+          if (widget.showImagePicker)
+            GestureDetector(
+              onTap: () async {
+                final image = await _picker.pickMultiImage();
+                if (image.isEmpty) return;
+
+                // ignore: use_build_context_synchronously
+                context
+                    .read<TextAndImageBloc>()
+                    .add(AddImage(image.map((e) => File(e.path)).toList()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Icon(
+                  Icons.image_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ),
-          ),
           Expanded(
             child: SizedBox(
               height: 45,
@@ -91,7 +96,9 @@ class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
               padding: const EdgeInsets.only(left: 8),
               child: Icon(
                 Icons.send_rounded,
-                color: widget.textController.text.isEmpty ? Colors.grey : Theme.of(context).colorScheme.primary,
+                color: widget.textController.text.isEmpty
+                    ? Colors.grey
+                    : Theme.of(context).colorScheme.primary,
               ),
             ),
           )

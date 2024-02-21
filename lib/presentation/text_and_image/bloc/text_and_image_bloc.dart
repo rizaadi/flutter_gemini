@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_gemini/data/repository/gemini_repository.dart';
+import 'package:flutter_gemini/data/repository/gemini_repository_impl.dart';
 
 part 'text_and_image_event.dart';
 part 'text_and_image_state.dart';
 
 class TextAndImageBloc extends Bloc<TextAndImageEvent, TextAndImageState> {
-  final GeminiRepository geminiRepository;
+  final GeminiRepositoryImpl geminiRepository;
 
   TextAndImageBloc({required this.geminiRepository})
       : super(TextAndImageState.initial()) {
