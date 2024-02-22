@@ -12,7 +12,10 @@ class TextOnlyBloc extends Bloc<TextOnlyEvent, TextOnlyState> {
       : super(TextOnlyState.initial()) {
     on<TextOnlyGenerate>((event, emit) async {
       try {
-        emit(state.copyWith(status: TextOnlyStatus.loading));
+        emit(state.copyWith(
+          prompt: event.text,
+          status: TextOnlyStatus.loading,
+        ));
 
         final response = await geminiRepository.textOnly(event.text);
 

@@ -5,14 +5,14 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_gemini/presentation/text_only/bloc/text_only_bloc.dart';
 import 'package:flutter_gemini/presentation/widgets/text_field_bottom_widget.dart';
 
-class PageOnlyPage extends StatefulWidget {
-  const PageOnlyPage({super.key});
+class TextOnlyPage extends StatefulWidget {
+  const TextOnlyPage({super.key});
 
   @override
-  State<PageOnlyPage> createState() => _PageOnlyPageState();
+  State<TextOnlyPage> createState() => _TextOnlyPageState();
 }
 
-class _PageOnlyPageState extends State<PageOnlyPage> {
+class _TextOnlyPageState extends State<TextOnlyPage> {
   final textController = TextEditingController();
 
   @override
@@ -56,7 +56,9 @@ class _PageOnlyPageState extends State<PageOnlyPage> {
                     duration: const Duration(milliseconds: 300),
                     transitionBuilder: (child, animation) {
                       return SlideTransition(
-                        position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
+                        position: Tween<Offset>(
+                                begin: const Offset(0, 1), end: Offset.zero)
+                            .animate(animation),
                         child: child,
                       );
                     },
@@ -75,7 +77,10 @@ class _PageOnlyPageState extends State<PageOnlyPage> {
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primary
+                                      .withOpacity(0.1),
                                   spreadRadius: 1,
                                   blurRadius: 5,
                                   offset: const Offset(0, -1),
@@ -94,7 +99,9 @@ class _PageOnlyPageState extends State<PageOnlyPage> {
               TextFieldBottomWidget(
                 textController: textController,
                 onFieldSubmitted: () {
-                  context.read<TextOnlyBloc>().add(TextOnlyGenerate(textController.text));
+                  context
+                      .read<TextOnlyBloc>()
+                      .add(TextOnlyGenerate(textController.text));
                 },
               ),
             ],

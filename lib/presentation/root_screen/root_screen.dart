@@ -43,7 +43,7 @@ class _RootScreenState extends State<RootScreen> with TickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         children: const [
-          PageOnlyPage(),
+          TextOnlyPage(),
           TextAndImagePage(),
           Center(child: Text('Chat')),
         ],
