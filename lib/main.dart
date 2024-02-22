@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_gemini/data/repository/gemini_repository_impl.dart';
-import 'package:flutter_gemini/presentation/root_screen/root_screen.dart';
-import 'package:flutter_gemini/presentation/text_and_image/bloc/text_and_image_bloc.dart';
-import 'package:flutter_gemini/presentation/text_only/bloc/text_only_bloc.dart';
+import 'package:flutter_gemini/feature/gemini/repository/gemini_repository_impl.dart';
+import 'package:flutter_gemini/feature/root_screen/root_screen.dart';
+import 'package:flutter_gemini/feature/text_and_image/bloc/text_and_image_bloc.dart';
+import 'package:flutter_gemini/feature/text_only/bloc/text_only_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

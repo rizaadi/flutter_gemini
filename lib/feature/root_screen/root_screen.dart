@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gemini/presentation/text_and_image/pages/text_and_image_page.dart';
-import 'package:flutter_gemini/presentation/text_only/pages/text_only_pages.dart';
+import 'package:flutter_gemini/feature/text_and_image/pages/text_and_image_page.dart';
+import 'package:flutter_gemini/feature/text_only/pages/text_only_pages.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});

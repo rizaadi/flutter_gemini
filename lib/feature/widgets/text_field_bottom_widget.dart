@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gemini/presentation/text_and_image/bloc/text_and_image_bloc.dart';
+import 'package:flutter_gemini/feature/text_and_image/bloc/text_and_image_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class TextFieldBottomWidget extends StatefulWidget {

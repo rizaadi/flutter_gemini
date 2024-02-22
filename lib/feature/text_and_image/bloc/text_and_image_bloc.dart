@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_gemini/data/repository/gemini_repository_impl.dart';
+import 'package:flutter_gemini/feature/gemini/repository/gemini_repository_impl.dart';
 
 part 'text_and_image_event.dart';
 part 'text_and_image_state.dart';

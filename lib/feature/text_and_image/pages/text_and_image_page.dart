@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gemini/presentation/text_and_image/bloc/text_and_image_bloc.dart';
-import 'package:flutter_gemini/presentation/widgets/text_field_bottom_widget.dart';
+import 'package:flutter_gemini/feature/text_and_image/bloc/text_and_image_bloc.dart';
+import 'package:flutter_gemini/feature/widgets/text_field_bottom_widget.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 class TextAndImagePage extends StatefulWidget {
