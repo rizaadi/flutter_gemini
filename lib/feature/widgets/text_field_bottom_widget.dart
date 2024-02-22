@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gemini/feature/text_and_image/bloc/text_and_image_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'package:flutter_gemini/feature/text_and_image/bloc/text_and_image_bloc.dart';
 
 class TextFieldBottomWidget extends StatefulWidget {
   const TextFieldBottomWidget({
@@ -14,7 +15,7 @@ class TextFieldBottomWidget extends StatefulWidget {
   });
 
   final TextEditingController textController;
-  final VoidCallback onFieldSubmitted;
+  final VoidCallback? onFieldSubmitted;
   final bool showImagePicker;
 
   @override
@@ -22,7 +23,6 @@ class TextFieldBottomWidget extends StatefulWidget {
 }
 
 class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
-  final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +38,8 @@ class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
           if (widget.showImagePicker)
             GestureDetector(
               onTap: () async {
-                final image = await _picker.pickMultiImage();
+                final ImagePicker picker = ImagePicker();
+                final image = await picker.pickMultiImage();
                 if (image.isEmpty) return;
 
                 // ignore: use_build_context_synchronously
@@ -66,7 +67,7 @@ class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
                   setState(() {});
                 },
                 onFieldSubmitted: (value) {
-                  widget.onFieldSubmitted();
+                  widget.onFieldSubmitted!();
                   widget.textController.clear();
                 },
                 decoration: InputDecoration(
@@ -86,17 +87,19 @@ class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
             ),
           ),
           GestureDetector(
-            onTap: widget.textController.text.isEmpty
+            onTap: widget.onFieldSubmitted == null ||
+                    widget.textController.text.isEmpty
                 ? null
                 : () {
-                    widget.onFieldSubmitted();
+                    widget.onFieldSubmitted!();
                     widget.textController.clear();
                   },
             child: Padding(
               padding: const EdgeInsets.only(left: 8),
               child: Icon(
                 Icons.send_rounded,
-                color: widget.textController.text.isEmpty
+                color: widget.onFieldSubmitted == null ||
+                        widget.textController.text.isEmpty
                     ? Colors.grey
                     : Theme.of(context).colorScheme.primary,
               ),
