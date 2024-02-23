@@ -4,7 +4,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:flutter_gemini/feature/text_and_image/bloc/text_and_image_bloc.dart';
 import 'package:flutter_gemini/feature/text_and_image/widgets/place_holder_text_and_image.dart';
-import 'package:flutter_gemini/feature/widgets/text_field_bottom_widget.dart';
+import 'package:flutter_gemini/core/widgets/text_field_bottom_widget.dart';
 
 class TextAndImagePage extends StatefulWidget {
   const TextAndImagePage({super.key});

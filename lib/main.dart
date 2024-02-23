@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gemini/feature/chat/bloc/chat_bloc.dart';
 import 'package:flutter_gemini/feature/gemini/repository/gemini_repository_impl.dart';
 import 'package:flutter_gemini/feature/root_screen/root_screen.dart';
 import 'package:flutter_gemini/feature/text_and_image/bloc/text_and_image_bloc.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       home: MultiBlocProvider(
         providers: [
           BlocProvider<TextOnlyBloc>(
@@ -33,7 +35,11 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 TextAndImageBloc(geminiRepository: GeminiRepositoryImpl()),
-          )
+          ),
+          BlocProvider(
+            create: (context) =>
+                ChatBloc(geminiRepository: GeminiRepositoryImpl()),
+          ),
         ],
         child: const RootScreen(),
       ),

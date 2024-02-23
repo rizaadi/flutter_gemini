@@ -12,11 +12,13 @@ class TextFieldBottomWidget extends StatefulWidget {
     required this.textController,
     required this.onFieldSubmitted,
     this.showImagePicker = false,
+    this.isLoading = false,
   });
 
   final TextEditingController textController;
   final VoidCallback? onFieldSubmitted;
   final bool showImagePicker;
+  final bool isLoading;
 
   @override
   State<TextFieldBottomWidget> createState() => _TextFieldBottomWidgetState();
@@ -86,25 +88,37 @@ class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: widget.onFieldSubmitted == null ||
-                    widget.textController.text.isEmpty
-                ? null
-                : () {
-                    widget.onFieldSubmitted!();
-                    widget.textController.clear();
-                  },
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Icon(
-                Icons.send_rounded,
-                color: widget.onFieldSubmitted == null ||
-                        widget.textController.text.isEmpty
-                    ? Colors.grey
-                    : Theme.of(context).colorScheme.primary,
+          if (widget.isLoading)
+            const Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
               ),
-            ),
-          )
+            )
+          else
+            GestureDetector(
+              onTap: widget.onFieldSubmitted == null ||
+                      widget.textController.text.isEmpty
+                  ? null
+                  : () {
+                      widget.onFieldSubmitted!();
+                      widget.textController.clear();
+                    },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Icon(
+                  Icons.send_rounded,
+                  color: widget.onFieldSubmitted == null ||
+                          widget.textController.text.isEmpty
+                      ? Colors.grey
+                      : Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            )
         ],
       ),
     );

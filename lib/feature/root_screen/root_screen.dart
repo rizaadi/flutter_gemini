@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/feature/chat/pages/chat_page.dart';
 import 'package:flutter_gemini/feature/text_and_image/pages/text_and_image_page.dart';
 import 'package:flutter_gemini/feature/text_only/pages/text_only_pages.dart';
 
@@ -45,7 +46,7 @@ class _RootScreenState extends State<RootScreen> with TickerProviderStateMixin {
         children: const [
           TextOnlyPage(),
           TextAndImagePage(),
-          Center(child: Text('Chat')),
+          ChatPage(),
         ],
       ),
     );

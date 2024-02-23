@@ -7,7 +7,9 @@ import 'package:flutter_gemini/feature/gemini/repository/gemini_repository.dart'
 
 class GeminiRepositoryImpl implements GeminiRepository {
   @override
-  Future<GenerateContentResponse> textOnly(String text) async {
+  Future<GenerateContentResponse> textOnly(
+    String text,
+  ) async {
     final apiKey = ApiKey().getApiKey();
 
     final model = GenerativeModel(
@@ -21,7 +23,9 @@ class GeminiRepositoryImpl implements GeminiRepository {
 
   @override
   Future<GenerateContentResponse> textAndImage(
-      String text, List<File> images) async {
+    String text,
+    List<File> images,
+  ) async {
     final apiKey = ApiKey().getApiKey();
 
     final model = GenerativeModel(
@@ -44,5 +48,27 @@ class GeminiRepositoryImpl implements GeminiRepository {
 
     final response = await model.generateContent(content);
     return response;
+  }
+
+  @override
+  Future<ChatSession> chat(
+    String text,
+    ChatSession? chatSession,
+  ) async {
+    final apiKey = ApiKey().getApiKey();
+
+    final model = GenerativeModel(
+      model: 'gemini-pro',
+      apiKey: apiKey,
+    );
+
+    if (chatSession == null) {
+      final session = model.startChat();
+      await session.sendMessage(Content.text(text));
+      return session;
+    } else {
+      await chatSession.sendMessage(Content.text(text));
+      return chatSession;
+    }
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:flutter_gemini/feature/text_only/bloc/text_only_bloc.dart';
-import 'package:flutter_gemini/feature/widgets/text_field_bottom_widget.dart';
+import 'package:flutter_gemini/core/widgets/text_field_bottom_widget.dart';
 
 class TextOnlyPage extends StatefulWidget {
   const TextOnlyPage({super.key});
