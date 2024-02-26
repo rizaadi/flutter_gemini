@@ -51,7 +51,7 @@ class GeminiRepositoryImpl implements GeminiRepository {
   }
 
   @override
-  Future<ChatSession> chat(
+  Future<(ChatSession, String)> chat(
     String text,
     ChatSession? chatSession,
   ) async {
@@ -64,11 +64,11 @@ class GeminiRepositoryImpl implements GeminiRepository {
 
     if (chatSession == null) {
       final session = model.startChat();
-      await session.sendMessage(Content.text(text));
-      return session;
+      final response = await session.sendMessage(Content.text(text));
+      return (session, response.text!);
     } else {
-      await chatSession.sendMessage(Content.text(text));
-      return chatSession;
+      final response = await chatSession.sendMessage(Content.text(text));
+      return (chatSession, response.text!);
     }
   }
 }

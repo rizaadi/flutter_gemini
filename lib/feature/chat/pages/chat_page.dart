@@ -2,11 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 
 import 'package:flutter_gemini/core/widgets/text_field_bottom_widget.dart';
 import 'package:flutter_gemini/feature/chat/bloc/chat_bloc.dart';
-import 'package:flutter_gemini/feature/chat/pages/widgets/message_widget.dart';
+import 'package:flutter_gemini/feature/chat/widgets/message_widget.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -47,8 +46,6 @@ class _ChatPageState extends State<ChatPage> {
                         content: Text('Something went wrong!'),
                       ),
                     );
-                  } else if (state.status == ChatStatus.loaded) {
-                    _scrollDown();
                   }
                 },
                 builder: (context, state) {
@@ -58,17 +55,10 @@ class _ChatPageState extends State<ChatPage> {
                   return ListView.builder(
                     padding: const EdgeInsets.all(16),
                     controller: _scrollController,
-                    itemCount: state.chatSession?.history.length ?? 0,
+                    itemCount: state.messages.length,
                     itemBuilder: (context, index) {
-                      var content = state.chatSession!.history.toList()[index];
-                      var text = content.parts
-                          .whereType<TextPart>()
-                          .map<String>((e) => e.text)
-                          .join('');
-                      return MessageWidget(
-                        text: text,
-                        isFromUser: content.role == 'user',
-                      );
+                      final message = state.messages[index];
+                      return MessageWidget(message: message);
                     },
                   );
                 },
@@ -85,6 +75,7 @@ class _ChatPageState extends State<ChatPage> {
                         .read<ChatBloc>()
                         .add(ChatSendMessage(text: _textController.text));
                     _textController.clear();
+                    _scrollDown();
                   },
                 );
               },
