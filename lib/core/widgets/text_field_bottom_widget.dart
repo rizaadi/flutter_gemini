@@ -45,9 +45,7 @@ class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
                 if (image.isEmpty) return;
 
                 // ignore: use_build_context_synchronously
-                context
-                    .read<TextAndImageBloc>()
-                    .add(AddImage(image.map((e) => File(e.path)).toList()));
+                context.read<TextAndImageBloc>().add(AddImage(image.map((e) => File(e.path)).toList()));
               },
               child: Padding(
                 padding: const EdgeInsets.only(right: 8),
@@ -101,19 +99,19 @@ class _TextFieldBottomWidgetState extends State<TextFieldBottomWidget> {
             )
           else
             GestureDetector(
-              onTap: widget.onFieldSubmitted == null ||
-                      widget.textController.text.isEmpty
+              onTap: widget.onFieldSubmitted == null || widget.textController.text.isEmpty
                   ? null
                   : () {
                       widget.onFieldSubmitted!();
-                      widget.textController.clear();
+                      setState(() {
+                        widget.textController.clear();
+                      });
                     },
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Icon(
                   Icons.send_rounded,
-                  color: widget.onFieldSubmitted == null ||
-                          widget.textController.text.isEmpty
+                  color: widget.onFieldSubmitted == null || widget.textController.text.isEmpty
                       ? Colors.grey
                       : Theme.of(context).colorScheme.primary,
                 ),
